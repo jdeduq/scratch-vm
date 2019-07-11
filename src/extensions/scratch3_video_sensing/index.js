@@ -473,6 +473,14 @@ class Scratch3VideoSensingBlocks {
                     }
                 },
                 {
+                    opcode: 'videoSnapshot',
+                    text: formatMessage({
+                        id: 'videoSensing.videoSnapshot',
+                        default: 'take video snapshot',
+                        description: 'Controls display of the video preview layer'
+                    })
+                },
+                {
                     opcode: 'setVideoTransparency',
                     text: formatMessage({
                         id: 'videoSensing.setVideoTransparency',
@@ -569,6 +577,27 @@ class Scratch3VideoSensingBlocks {
             // Mirror if state is ON. Do not mirror if state is ON_FLIPPED.
             this.runtime.ioDevices.video.mirror = state === VideoState.ON;
         }
+    }
+
+    /**
+     * A scratch command block handle asks for recognition of the current 
+     * video snapshot and receives an answer from tab to tab communication
+     */
+    snapshotRecognition () {
+        if (this.imageBlob !== null) {
+            
+        }
+    }
+    
+    /**
+     * A scratch command block handle that captures an image
+     * from the webcam feed.
+     */
+    videoSnapshot () {
+        if (this.globalVideoState === VideoState.OFF) {
+            this.runtime.ioDevices.video.enableVideo();
+        }
+        this.runtime.ioDevices.video.getSnapshot();
     }
 
     /**
